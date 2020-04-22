@@ -24,7 +24,7 @@
             Your browswer does not support the audio element.
         </audio>
         <div id="shell">
-                <dive id="gameMsgBox" onclick="hideGameMsg()"></dive><p id = "gameMsg"></p></div>
+                <div id="gameMsgBox" onclick="hideGameMsg()"></dive><p id = "gameMsg"></p></div>
 
                 <div class="console_Left">
                     <div class="displayBox boxLeft">
@@ -119,8 +119,28 @@
                             </div>
                         </td>
                     </tr>
-
                 </table>
+
+                <div class="console_Right" style="float:right;">
+                    <div class="displayBox boxRight">
+                        <Strong>Configuration:<</Strong><br><br>
+                        <label>Player 1: </label><select id="player1"><option value="X">X</option><option value="O">O</option></select><br>
+                        <label>Player 2: </label><select id="player2"><option value="X">X</option><option value="O">0</option></select>
+                        <button onclick="saveSettings()">Save Config</button>
+                    </div>
+                    <div id="controls">
+                        <button id="btnStop" onclick="stopGame()">Stop Game</button>
+                    </div>   
+                </div>
+            </div>
+            <script>
+                var arrayO = document.getElementsByClassName("O");
+                var arrayX = document.getElementsByClassName("X");
+                for (var i=0; i<arrayO.length;i++) {
+                    arrayO[i].style.transform = "translateY(-100%)"; // this initializes all avatar graphics to not be visible as translateY(0%) would make them appear.
+                }
+            </script>
+
 
 
 
