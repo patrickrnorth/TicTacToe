@@ -278,7 +278,7 @@ function glowBoard(pos) {
     var squares = document.getElementsByClassName('square')
     for (var i=0;i<squares.length;i++) {
         if (i ==index0) {
-            var bgl = squares[1];
+            var bg1 = squares[i];
             blink();
             winSound();
             setTimeout(function() {bgl.style.backgroundColor = 'rgb(244,179,66)';}, 100);
@@ -286,8 +286,60 @@ function glowBoard(pos) {
             setTimeout(function() {bgl.style.backgroundColor = 'rgb(197,244,66)';}, 300);
             setTimeout(function() {bgl.style.backgroundColor = 'rgb(122,244,66)';}, 400);
             setTimeout(function() {bgl.style.backgroundColor = 'rgb(66,244,235)';}, 500);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(244,179,66)';}, 600);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(244,238,66)';}, 700);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(197,244,66)';}, 800);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(122,244,66)';}, 900);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(66,244,235)';}, 1000);
+            setTimeout(function() {bgl.style.backgroundColor = "#d7f3f7";}, 1100);
+        } else if (1 ==index1) {
+            var bg2 = squares[i];
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(66,244,235)";}, 100);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(122,244,66)";}, 200);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(197,244,66)";}, 300);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(244,235,66)";}, 400);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(244,179,66)";}, 500);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(66,244,235)";}, 600);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(122,244,66)";}, 700);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(197,244,66)";}, 800);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(244,235,66)";}, 900);
+            setTimeout(function() {bg2.style.backgroundColor = "rgb(244,179,66)";}, 1000);
+            setTimeout(function() {bg2.style.backgroundColor = "#d7f3f7";}, 1100);
+        } else if (i == index2) {
+            var bg3 = squares[i];
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(244,179,66)';}, 100);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(244,238,66)';}, 200);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(197,244,66)';}, 300);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(122,244,66)';}, 400);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(66,244,235)';}, 500);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(244,179,66)';}, 600);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(244,238,66)';}, 700);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(197,244,66)';}, 800);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(122,244,66)';}, 900);
+            setTimeout(function() {bg3.style.backgroundColor = 'rgb(66,244,235)';}, 1000);
+            setTimeout(function() {bg3.style.backgroundColor = "#d7f3f7";}, 1100);
         }
     }
+    setTimeout(function() {stopGame();}, 1200);
+}
+
+// these functions will produce game sounds depending on the occasion
+function squareSound() {
+    var sound = document.getElementById("placeAvatar");
+    sound.play();
+    setTimeout(function() {sound.pause();}, 400); // add delay to these to keep sound short
+    setTimeout(function() {sound.currentTime = 0;}, 500);
+}
+function tieSound() {
+    var sound = document.getElementById("tieGame");
+    var check = document.getElementById('gameMsg').innerHTML;
+    setTimeout(function() {sound.play();}, 500);
+}
+function winSound() {
+    var sound = document.getElementById("winGame");
+    setTimeout(function() {sound.play();}, 500);
+    setTimeout(function() {sound.pause();}, 2700); // add delay to these to keep sound short
+    setTimeout(function() {sound.currentTime = 0}, 2800);
 }
 // checking for wincon squares 012
 function checkWinCon1(info,squareArray) {
@@ -300,13 +352,13 @@ function checkWinCon1(info,squareArray) {
     // avatars and compare all 3 for win cons
     for (var i in info) {
         if (info[i].charAt(O) == "0") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "1") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "2") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     // this will trigger (ONLY) if there was a match for index0, index1, and index2
@@ -326,13 +378,13 @@ function checkWinCon2(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "3") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "4") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "5") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match3Avatar != undefined && match4Avatar != undefined && match5Avatar != undefined) {
@@ -349,13 +401,13 @@ function checkWinCon3(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "6") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "7") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "8") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match6Avatar != undefined && match7Avatar != undefined && match6Avatar != undefined) {
@@ -371,13 +423,13 @@ function checkWinCon4(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "0") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "3") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "6") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match0Avatar != undefined && match3Avatar != undefined && match6Avatar != undefined) {
@@ -393,13 +445,13 @@ function checkWinCon5(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "1") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "4") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "7") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match1Avatar != undefined && match4Avatar != undefined && match7Avatar != undefined) {
@@ -415,13 +467,13 @@ function checkWinCon6(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "2") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "5") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "8") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match2Avatar != undefined && match5Avatar != undefined && match8Avatar != undefined) {
@@ -437,13 +489,13 @@ function checkWinCon7(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "0") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "4") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "8") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match0Avatar != undefined && match4Avatar != undefined && match8Avatar != undefined) {
@@ -459,13 +511,13 @@ function checkWinCon8(info,squareArray) {
     var winDetected = "on";
     for (var i in info) {
         if (info[i].charAt(O) == "2") {
-            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+            var match6Avatar = info[i].charAt(1); //only interested in recording the avatar
         }
         if (info[i].charAt(O) == "4") {
-            var match7Avatar = info[i].charAt(l);
+            var match7Avatar = info[i].charAt(1);
         }
         if (info[i].charAt(O) == "6") {
-            var match8Avatar = info[i].charAt(l);
+            var match8Avatar = info[i].charAt(1);
         }
     }
     if (match2Avatar != undefined && match4Avatar != undefined && match6Avatar != undefined) {
