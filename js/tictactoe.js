@@ -139,7 +139,35 @@ function saveSettings() {
     var p1Selected = document.getElementById("player1").options;
     var p2Index = document.getElementById("player2").selectedIndex;
     var p2Selected = document.getElementById("player2").options;
-    if
+    if (p1Selected[p1Index].text == p2Selected[p2Index].text) {
+        alert("Error - Player 1 and Player 2 cannot both be assigned as: "+p1Selected[p1Index].text);
+    } else {
+        document.getElementById('p1Display').innerHTML=p1Selected[p1Index].text;
+        document.getElementById("psDisplay").innerHTML=p2Selected[p2Index].text;
+    }
+}
+
+// this function returns the currently assigned avatar for each player
+function getAvatars() {
+    var p1Avatar = document.getElementById("p1Display").innerHTML;
+    var p2Avatar = document.getElementById("p2Display").innerHTML;
+    var avatarArray = [p1Avatar,p2Avatar];
+    return avatarArray;
+}
+
+//this function will return the active player's avatar
+function determineAvatar() {
+    // determine the correct avatar to paint for the active player
+    var avatarArray = getAvatars(); // returns an array of both player's assigned avatars
+    var active = document.getElementById("showPlayer").innerHTML; // get active player
+    p1Avatar = avatarArray[0];
+    p2Avatar = avatarArray[1];
+    if (active == "Player 1") {   //check which player is active and their corresponding avatar
+        var paintAvatar = p1Avatar;
+    } else if (active == "Player 2") {
+        var paintAvatar = p2Avatar;
+    }
+    return paintAvatar; // returned back the correct avatar
 }
 
 
