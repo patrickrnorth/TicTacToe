@@ -1,3 +1,5 @@
+// This function will get fired once the DOM is loaded.
+// Disable the stop button since it is not needed until game start.
 window.onload = function () {watch()};
 function watch() {
     var btn = document.getElementById("btnStop");
@@ -15,7 +17,7 @@ function rollForTurn()  {
     var txt1 = "";
     for (var i = 0; i < 2; i++) {
         //random whole number between 1 and 10
-        ranNum - Math.floor(Math.random() * (maximum - minimum) + minimum);
+        ranNum = Math.floor(Math.random() * (maximum - minimum) + minimum);
         xArray.push(ranNum);
     }
     diceRoll(); //play dice sounds during the game roll for turn
@@ -28,7 +30,7 @@ function rollForTurn()  {
             pOne = 1;
             pTwo = 2;
         }
-        txt1 = "Player 1 rolled ["+pOne+"]<br>"; // may have wrong brackets!!!!
+        txt1 = "Player 1 rolled [+pOne+]<br>"; // may have wrong brackets!!!!
         writeMsg(txt1);
         txt1 = txt1 + "Player 2 rolled [+pTwo+]<br><br>";
         setTimeout(function() {writeMsg(txt1);}, 1000); //time delay for dramatic affect
@@ -86,30 +88,37 @@ function stopEnabled(btn) {
     btn.disabled = false;
 }
 
-//this function styles the game buttons while they are disabled
+// this function styles the game buttons while they are disabled
+function startEnabled(btn) {
+    btn.style.color = "#fff";
+    btn.style.border = "2px solid rgb(0, 153, 0)";
+    btn.style.backgroundColor = "rgb(57, 230,0)";
+    btn.disabled = false;
+}
+
+// when the user indicates, stop the current game and reset game
 function stopGame() {
     hideGameMsg(); //clear the text and hide message box
     var btn = document.getElementById("btnStart");
     startEnabled(btn); //enable the start button since the game is now stopped
     var btn = document.getElementById("btnStop");
     btnDisabled(btn); // disable the stop button since the game is now stopped
-    var showPlayer = document.getElementById("showPlayer");
+    var showPlayer = document.getElementById("showPlayer")
     showPlayer.innerHTML = "Game Stopped";
     showPlayer.style.color = "red";
 
-    // reset all squars to their starting empty state.
+    // reset all squares to their starting empty state.
     var arrayO = document.getElementsByClassName("O");
     var arrayX = document.getElementsByClassName("X");
     for (var i=0; i<arrayO.length; i++) {
-        arrayO[1].style.transform = "translateY(-100%)";
+        arrayO[i].style.transform = "translateY(-100%)";
     }
     for (var i=0; i<arrayX.length; i++) {
-        arrayX[1].style.transform = "translateY(100%)";
+        arrayX[i].style.transform = "translateY(100%)";
     }
     // this clears the running log of all game moves
-    document.getElementsByClassName("boardState").innerHTML = "";
+    document.getElementsById("boardState").innerHTML = "";
 }
-
 
 //this function will show the message console and any text it may have
 function showGameMsg() {
@@ -124,12 +133,12 @@ function hideGameMsg()  {
 // this function will write text to the game message console.
 function writeMsg(txt) {
     showGameMsg();
-    document.getElementById("gameMsg").innerHtml = txt;
+    document.getElementById("gameMsg").innerHTML = txt;
 }
 
 // this funciton will clear the text from the message console
 function clearMsg() {
-    document.getElementById("gameMsg").innerHtml = "";
+    document.getElementById("gameMsg").innerHTML = "";
 }
 
 // this function is for the player configuration panel and checks the
@@ -140,10 +149,10 @@ function saveSettings() {
     var p2Index = document.getElementById("player2").selectedIndex;
     var p2Selected = document.getElementById("player2").options;
     if (p1Selected[p1Index].text == p2Selected[p2Index].text) {
-        alert("Error - Player 1 and Player 2 cannot both be assigned as: "+p1Selected[p1Index].text);
+        alert("Error - Player 1 and Player 2 cannot both be assigned as: "+p1Selected[p1Index].text)
     } else {
         document.getElementById('p1Display').innerHTML=p1Selected[p1Index].text;
-        document.getElementById("psDisplay").innerHTML=p2Selected[p2Index].text;
+        document.getElementById("p2Display").innerHTML=p2Selected[p2Index].text;
     }
 }
 
@@ -194,7 +203,7 @@ function avatarPlaced() {
 function check(info,square) {
     for (var i in info) {
         var tempInfo = info[i].charAt(0); // comparing index of square
-        if (tempINfo == square) {
+        if (tempInfo == square) {
             return tempInfo;
         }
     }
@@ -205,7 +214,7 @@ function check(info,square) {
 function recordMoves(square) {
     var proposedMove = square;
     var boardState = document.getElementById("boardstate").innerHTML; // retrieve boardState array
-    var info = boardState.split(','); // separate the string by commas to create an arry
+    var info = boardState.split(','); // separate the string by commas to create an array
     verdict = check(info,square); // call function to check if proposed square is already occupied
     return verdict;
 }
@@ -361,13 +370,11 @@ function blink() {
     setTimeout(function() {body.style.backgroundColor = "#c6054e"}, 900);
     setTimeout(function() {body.style.backgroundColor = "#e00202"}, 1000);
     setTimeout(function() {body.style.backgroundColor = "#ffffff"}, 1100);
-
-
-
-
-
 }
 
+// ==============================================================================
+//These function are the algorithms to find all win conditions
+//===============================================================================
 // checking for wincon squares 012
 function checkWinCon1(info,squareArray) {
     var winDetected="on";
@@ -781,5 +788,4 @@ function animateO(selected) {
 
 function animateX(selected) {
     selected.style.transform = (selected.style.transform == "translateY(100%)" || null) ? "translateY(0%)" : "translateY(100%)";
-
 }
