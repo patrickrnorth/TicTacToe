@@ -214,7 +214,7 @@ function recordMoves(square) {
 // and then concatenate the current move to it.
 function recordMove(currentMove) {
     var target = document.getElementById('boardState');
-    var previousMOves = target.innerHTML;
+    var previousMoves = target.innerHTML;
     target.innerHTML = previousMoves+currentMove;
 }
 function checkForWinCon() {
@@ -227,8 +227,102 @@ function checkForWinCon() {
     for (var l in info) {
         squareArray.push(info[i].charAt(0)); // new array with only squares not avatars
     }
+    // call this following array of functions to check for any of the possible win cons
+    checkWinCon1(info.squareArray);
+    checkWinCon2(info.squareArray);
+    checkWinCon3(info.squareArray);
+    checkWinCon4(info.squareArray);
+    checkWinCon5(info.squareArray);
+    checkWinCon6(info.squareArray);
+    checkWinCon7(info.squareArray);
+    checkWinCon8(info.squareArray);
+    //console.log("new CHECK: "+document.getElementById('gameMsg').innerHTML);
+    check4Tie();
+
+}
+// call this function to check board state for any ties and act accordingly
+function check4Tie() {
+    var boardState = document.getElementById('boardState').innerHTML;
+    boardState = boardState.substring(l); // remove leading comma
+    boardState = boardState.split(','); //separate the string by commas into an array
+    var check = document.getElementById('gameMsg').innerHTML;
+    if (boardState.length >= 9 && check != "That's three in a row, Player 1 wins!" && check != "that's three in a row, Player 2 wins!") {
+        tieSound(); // play a sound when a tie has been detected
+        writeMsg(txt1);
+        setTimeout(function() {stopGame();}, 3000);
+    }
 }
 
+// whenever a win is deteted the corresponding function will
+// call this function to produce the following winning process for the game
+function winner(winDetected, winCon) {
+    if (winDetected == "win") {
+        var showme = winDetected;
+        var activePlayer = document.getElementById('showPlayer').innerHTML;
+        var txt2 = "That's three in a row, "+activePlayer+" wins!";
+        writeMsg(txt2);
+        var btn = document.getElementById('btnStart');
+        startEnabled(btn); // enable the start button since the game is now stopped
+        var btn = document.getElementById('btnStop');
+        btnDisabled(btn);// disable the stop button since the game is now stopped
+        document.getElementById('showPlayer').innerHTML = "Game Stopped";
+        glowBoard(winCon); // call function to make the gameboard pulse with colors
+    }
+}
+
+// checking for wincon squares 012
+function checkWinCon1(info,squareArray) {
+    var winDetected="on";
+    var winCon1 = [0,1,2];
+    // iterate through the growing array during
+    // gametime searching for the existence of 
+    // index 0, index 1 and index 2 and once they
+    // do appear in the arry, record their
+    // avatars and compare all 3 for win cons
+    for (var i in info) {
+        if (info[i].charAt(O) == "0") {
+            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+        }
+        if (info[i].charAt(O) == "1") {
+            var match7Avatar = info[i].charAt(l);
+        }
+        if (info[i].charAt(O) == "2") {
+            var match8Avatar = info[i].charAt(l);
+        }
+    }
+    // this will trigger (ONLY) if there was a match for index0, index1, and index2
+    if (match0Avatar != undefined && match1Avatar != undefined && match2Avatar != undefined) {
+        if (match0Avatar == match1Avatar && match0Avatar == match2Avatar) {
+            windDetected = "win"; // this flag will pass when a win has been detecgted
+            winner(winDetected,winCon1);
+            return;
+        }
+    }
+    winner(winDetected, winCon1); // winCon1 is the array of win combo
+}
+
+// checking for wincon squares 678
+function checkWinCon3(info,squareArray) {
+    var winCon3 = [6,7,8];
+    var winDetected = "on";
+    for (var i in info) {
+        if (info[i].charAt(O) == "6") {
+            var match6Avatar = info[i].charAt(l); //only interested in recording the avatar
+        }
+        if (info[i].charAt(O) == "7") {
+            var match7Avatar = info[i].charAt(l);
+        }
+        if (info[i].charAt(O) == "8") {
+            var match8Avatar = info[i].charAt(l);
+        }
+    }
+    if (match6Avatar != undefined && match7Avatar != undefined && match6Avatar != undefined) {
+        if (match6Avatar == match7Avatar && match6Avatar == match8Avatar) {
+            windDetected = "win";
+        }
+    }
+    winner(winDetected, winCon3);
+}
 //==================================================================================================
 //  These block of functions are for each click event of their corresponding square element
 //==================================================================================================
