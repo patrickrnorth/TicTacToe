@@ -341,6 +341,33 @@ function winSound() {
     setTimeout(function() {sound.pause();}, 2700); // add delay to these to keep sound short
     setTimeout(function() {sound.currentTime = 0}, 2800);
 }
+function diceRoll() {
+    var sound = document.getElementById.getElementById("diceRoll");
+    sound.play();
+}
+
+// call this function to make entire background color
+// flash for a few seconds for a win animation
+function blink() {
+    var body = document.getAvatars('body');
+    setTimeout(function() {body.style.backgroundColor = "#94f7ed"}, 100);
+    setTimeout(function() {body.style.backgroundColor = "#94cef7"}, 200);
+    setTimeout(function() {body.style.backgroundColor = "#94a6f7"}, 300);
+    setTimeout(function() {body.style.backgroundColor = "#b094f7"}, 400);
+    setTimeout(function() {body.style.backgroundColor = "#cc94f7"}, 500);
+    setTimeout(function() {body.style.backgroundColor = "#e894f7"}, 600);
+    setTimeout(function() {body.style.backgroundColor = "#f794d9"}, 700);
+    setTimeout(function() {body.style.backgroundColor = "#f73881"}, 800);
+    setTimeout(function() {body.style.backgroundColor = "#c6054e"}, 900);
+    setTimeout(function() {body.style.backgroundColor = "#e00202"}, 1000);
+    setTimeout(function() {body.style.backgroundColor = "#ffffff"}, 1100);
+
+
+
+
+
+}
+
 // checking for wincon squares 012
 function checkWinCon1(info,squareArray) {
     var winDetected="on";
