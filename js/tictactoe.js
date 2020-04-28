@@ -170,6 +170,52 @@ function determineAvatar() {
     return paintAvatar; // returned back the correct avatar
 }
 
+// this function changes active player over to the other player
+function avatarPlaced() {
+    var parseText = document.getElementById("gameMsg").innerHTML;
+    var showPlayer = document.getElementById("showPlayer"); // select the current element to memory
+    // check if there is already a winner...if there is, then dont continue the game
+    if (parseText == "That's three in a row, Player 1 wins!" || parseText == "That's three in a row, Player 2 wins!"){
+        showPlayer.innerHTML = "Game Stopped";
+        showPlayer.style.color = "red";
+    }
+    activePlayer = showPlayer.innerHTML; // get the current player from the element
+    if (activePlayer == "Player 1") { // once active player selects a square change the active player
+        showPlayer.innerHTML = "Player 2";        
+    } else {
+        showPlayer.innerHTML = "Player 1";
+    }
+    check4Tie(); // call this function to inquire if there was a cat's game.
+}
+
+
+//==================================================================================================
+//  These block of functions are for each click event of their corresponding square element
+//==================================================================================================
+function square1Animate()  {
+    var activePlayer = document.getElementById("showPlayer").innerHTML;
+    if (activePlayer != "Game Stopped") { // if game has not yet started prevent avatar placement
+        var square = "0"; // identify the square selected
+        // check if the proposed square is valid
+        var verdict = recordMoves(square);
+        if (verdict == undefined) { // if verdict is empty than the square is unoccumpied.
+            var paintAvatar = determineAvatar(); // get the correct avatar to paint for the active player
+            var selected = document.getElementsByClassName(paintAvatar)[0]; // paint avatar
+            if (paintAvatar == "O") { // change these all to ternary statements instead
+                animateO(selected); // call function to animate O
+            } else if (paintAvatar == "X") {
+                animateX(selected); // call function to animate X
+            }
+            // build new array adding the newly selected square and the assigned avatar
+            var currentMove = ","+square+paintAvatar;
+            recordMove (currentMove);
+        }
+    
+    }
+}
+
+
+
 
 
 
