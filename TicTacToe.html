@@ -28,16 +28,16 @@
 
                 <div class="console_Left">
                     <div class="displayBox boxLeft">
-                        <Strong>Current Config:</Strong><br><br>
-                        <label>Player 1: &nbsp;&nbsp;<span id="p1Display">O</span></label><br>
-                        <label>Player 2: &nbsp;&nbsp;<span id="p2Display">X</span></label>
+                        <strong>Current Config:</strong><br><br>
+                        <label>Player 1: &nbsp;&nbsp;<span id="p1Display">X</span></label><br>
+                        <label>Player 2: &nbsp;&nbsp;<span id="p2Display">O</span></label>
                     </div>
                     <div class=""><button id="btnStart" onclick="startGame()">Start Game</button></div>
                     <div id ="boardState"></div>
                     <div id="controls">
                         <div id="messageFrame">
-                            <p id="ShowHeader">ACTIVE PLAYER:</p>
-                            <p id="ShowPlayer">Game Stopped</p>
+                            <p id="showHeader">ACTIVE PLAYER:</p>
+                            <p id="showPlayer">Game Stopped</p>
                         </div>
                     </div>
                 </div>
@@ -103,14 +103,16 @@
                                     <div class="X"></div>
                                 </div>
                             </div>
-                        </td> <td>
+                        </td> 
+                        <td>
                             <div class="photo-container">
                                 <div id="square7" class="square" onclick="square8Animate()">
                                     <div class="O"></div>
                                     <div class="X"></div>
                                 </div>
                             </div>
-                        </td> <td>
+                        </td> 
+                        <td>
                             <div class="photo-container">
                                 <div id="square8" class="square" onclick="square9Animate()">
                                     <div class="O"></div>
@@ -123,9 +125,9 @@
 
                 <div class="console_Right" style="float:right;">
                     <div class="displayBox boxRight">
-                        <Strong>Configuration:</Strong><br><br>
+                        <strong>Configuration:</strong><br><br>
                         <label>Player 1: </label><select id="player1"><option value="X">X</option><option value="O">O</option></select><br>
-                        <label>Player 2: </label><select id="player2"><option value="X">X</option><option value="O">O</option></select>
+                        <label>Player 2: </label><select id="player2"><option value="X">X</option><option value="O" selected = "selected">O</option></select>
                         <button onclick="saveSettings()">Save Config</button>
                     </div>
                     <div id="controls">

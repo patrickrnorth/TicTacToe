@@ -85,7 +85,7 @@ table tr:nth-child(3) td:nth-child(3) {
  .O {
      transition: transform .3s;
      opacity: 1;
-     position: absolute;
+     
      background-image: url("../images/avatarO.png");
      width:200px;
      height:200px;
@@ -220,7 +220,7 @@ table tr:nth-child(3) td:nth-child(3) {
     background-color: rgb(57, 230, 0);
     margin: 20px 0px 0px 25px;
     padding: 12px 14px 12px 14px;
-    box-shadow: inset 3px 3px 15px -2px rgba(255, 255, 255, 0.95), 3px 3px 15px -4px rgba(0, 0, 0, .65);
+    box-shadow: inset 3px 3px 15px -2px rgba(255, 255, 255, 0.95), 3px 3px 15px -4px rgba(0, 0, 0, .85);
     border-radius: 10px;
 }
 
