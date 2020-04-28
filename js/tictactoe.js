@@ -189,6 +189,46 @@ function avatarPlaced() {
 }
 
 
+// this function will get the array of the current board
+// and check the proposed move for a validity
+function check(info,square) {
+    for (var i in info) {
+        var tempInfo = info[i].charAt(0); // comparing index of square
+        if (tempINfo == square) {
+            return tempInfo;
+        }
+    }
+}
+
+// as squares are selected they check in with this function to see if that particular
+// square has already been assigned and if it has not, record new square with the assigned avatar.
+function recordMoves(square) {
+    var proposedMove = square;
+    var boardState = document.getElementById("boardstate").innerHTML; // retrieve boardState array
+    var info = boardState.split(','); // separate the string by commas to create an arry
+    verdict = check(info,square); // call function to check if proposed square is already occupied
+    return verdict;
+}
+
+//this function will get list of previous moves
+// and then concatenate the current move to it.
+function recordMove(currentMove) {
+    var target = document.getElementById('boardState');
+    var previousMOves = target.innerHTML;
+    target.innerHTML = previousMoves+currentMove;
+}
+function checkForWinCon() {
+    var squareArray = [];
+    var target = document.getElementById("boardState");
+    var info = target.innerHTML; // raw array with squares and avatars
+    info = info.substring(l); // remove leading comma
+    info = info.split(','); // separate the string by commas into an array
+    info.sort(); // sort the square array in order despite the actual gameplay sequence
+    for (var l in info) {
+        squareArray.push(info[i].charAt(0)); // new array with only squares not avatars
+    }
+}
+
 //==================================================================================================
 //  These block of functions are for each click event of their corresponding square element
 //==================================================================================================
@@ -409,45 +449,12 @@ function square9Animate()  {
     }
 }
 
-
-
-
-// this function will get the array of the current board
-// and check the proposed move for a validity
-function check(info,square) {
-    for (var i in info) {
-        var tempInfo = info[i].charAt(0); // comparing index of square
-        if (tempINfo == square) {
-            return tempInfo;
-        }
-    }
+// this function will perform the animation for th O avatar.
+function animateO(selected) {
+    selected.style.transform = (selected.style.transform == "translateY(-100%)" || null) ? "translateY(0)" : "translateY(-100%)";
 }
 
-// as squares are selected they check in with this function to see if that particular
-// square has already been assigned and if it has not, record new square with the assigned avatar.
-function recordMoves(square) {
-    var proposedMove = square;
-    var boardState = document.getElementById("boardstate").innerHTML; // retrieve boardState array
-    var info = boardState.split(','); // separate the string by commas to create an arry
-    verdict = check(info,square); // call function to check if proposed square is already occupied
-    return verdict;
-}
+function animateX(selected) {
+    selected.style.transform = (selected.style.transform == "translateY(100%)" || null) ? "translateY(0%)" : "translateY(100%)";
 
-//this function will get list of previous moves
-// and then concatenate the current move to it.
-function recordMove(currentMove) {
-    var target = document.getElementById('boardState');
-    var previousMOves = target.innerHTML;
-    target.innerHTML = previousMoves+currentMove;
-}
-function checkForWinCon() {
-    var squareArray = [];
-    var target = document.getElementById("boardState");
-    var info = target.innerHTML; // raw array with squares and avatars
-    info = info.substring(l); // remove leading comma
-    info = info.split(','); // separate the string by commas into an array
-    info.sort(); // sort the square array in order despite the actual gameplay sequence
-    for (var l in info) {
-        squareArray.push(info[i].charAt(0)); // new array with only squares not avatars
-    }
 }
