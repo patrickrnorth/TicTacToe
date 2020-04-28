@@ -270,6 +270,25 @@ function winner(winDetected, winCon) {
     }
 }
 
+//this function will make the winning squares light up in celebration
+function glowBoard(pos) {
+    var index0 = pos[0];
+    var index1 = pos[1];
+    var index2 = pos[2];
+    var squares = document.getElementsByClassName('square')
+    for (var i=0;i<squares.length;i++) {
+        if (i ==index0) {
+            var bgl = squares[1];
+            blink();
+            winSound();
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(244,179,66)';}, 100);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(244,238,66)';}, 200);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(197,244,66)';}, 300);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(122,244,66)';}, 400);
+            setTimeout(function() {bgl.style.backgroundColor = 'rgb(66,244,235)';}, 500);
+        }
+    }
+}
 // checking for wincon squares 012
 function checkWinCon1(info,squareArray) {
     var winDetected="on";
